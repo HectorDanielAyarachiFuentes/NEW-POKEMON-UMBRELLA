@@ -1,0 +1,78 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f2f2f2;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    max-width: 700px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
+
+h1 {
+    text-align: center;
+    color: #e64918; /* Rojo Pokémon */
+}
+
+.box {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.poke-search {
+    width: 100%;
+    padding: 10px;
+    border: 2px solid #e64918; /* Rojo Pokémon */
+    border-radius: 5px;
+    box-sizing: border-box; /* Añadido para incluir el padding en el ancho */
+}
+
+ul#pokedex {
+    list-style: none;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    grid-gap: 20px;
+}
+
+.card {
+    background-color: #fff;
+    border: 1px solid #e64918; /* Rojo Pokémon */
+    border-radius: 5px;
+    padding: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.card:hover {
+    transform: scale(1.05);
+}
+
+.card img {
+    margin: 0 auto;
+}
+
+.card p {
+    text-align: left;
+}
+
+
+@media (max-width: 768px) {
+    .container {
+        margin: 10px auto;
+        padding: 10px;
+    }
+
+    ul#pokedex {
+        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    }
+}
