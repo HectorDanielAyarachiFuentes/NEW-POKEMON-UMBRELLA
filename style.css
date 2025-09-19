@@ -1,54 +1,109 @@
+/* --- CSS Variables for Theming --- */
+:root {
+    --font-pixel: 'Press Start 2P', cursive;
+    --font-sans: Arial, sans-serif;
+}
+
+body.dark-theme {
+    --bg-color: #1a1a1a;
+    --text-color: #f1f1f1;
+    --container-bg: #2c2c2c;
+    --primary-color: #e53935; /* Team Rocket Red */
+    --primary-shadow: rgba(229, 57, 53, 0.5);
+    --card-bg: #424242;
+    --card-image-bg: #2c2c2c;
+    --loader-bg: #424242;
+    --border-color: #444;
+    --placeholder-color: #888;
+}
+
+body.light-theme {
+    --bg-color: #eef5ff; /* Light blue background */
+    --text-color: #212121;
+    --container-bg: #ffffff;
+    --primary-color: #3B4CCA; /* Pokémon Blue */
+    --primary-shadow: rgba(59, 76, 202, 0.4);
+    --card-bg: #fdfdfd;
+    --card-image-bg: #f2f2f2;
+    --loader-bg: #f1f1f1;
+    --border-color: #ddd;
+    --placeholder-color: #999;
+}
+
 body {
-    /* Estilo Team Rocket: fondo oscuro, fuente pixelada */
-    font-family: 'Press Start 2P', cursive;
-    background-color: #1a1a1a;
-    color: #f1f1f1;
+    font-family: var(--font-pixel);
+    background-color: var(--bg-color);
+    color: var(--text-color);
     margin: 0;
     padding: 0;
+    transition: background-color 0.3s, color 0.3s;
 }
 
 .container {
     max-width: 700px;
     margin: 20px auto;
     padding: 20px;
-    background-color: #2c2c2c;
+    background-color: var(--container-bg);
     border-radius: 5px;
-    border: 2px solid #e53935; /* Rojo Team Rocket */
-    box-shadow: 0 0 15px rgba(229, 57, 53, 0.5); /* Sombra roja */
+    border: 2px solid var(--primary-color);
+    box-shadow: 0 0 15px var(--primary-shadow);
     overflow: hidden;
+    transition: background-color 0.3s, border-color 0.3s, box-shadow 0.3s;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 15px;
 }
 
 h1 {
     text-align: center;
-    color: #e53935; /* Rojo Team Rocket */
-    text-shadow: 2px 2px 4px #000;
-    font-size: 2em;
+    color: var(--primary-color);
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+    font-size: 1.8em;
+    margin: 0;
+}
+
+.theme-toggle-btn {
+    font-family: var(--font-pixel);
+    background-color: var(--primary-color);
+    color: #fff;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    font-size: 0.7em;
+    white-space: nowrap;
 }
 
 .box {
     text-align: center;
-    margin-top: 20px;
+    margin-top: 25px;
 }
 
 .poke-search {
     width: 100%;
     padding: 10px;
-    border: 2px solid #e53935; /* Rojo Team Rocket */
+    border: 2px solid var(--primary-color);
     border-radius: 5px;
-    background-color: #1a1a1a;
-    color: #f1f1f1;
-    font-family: 'Press Start 2P', cursive;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    font-family: var(--font-pixel);
     box-sizing: border-box; /* Añadido para incluir el padding en el ancho */
     font-size: 0.9em;
 }
 
 .poke-search::placeholder {
-    color: #888;
+    color: var(--placeholder-color);
 }
 
 .poke-search:focus {
     outline: none;
-    box-shadow: 0 0 8px rgba(229, 57, 53, 0.7);
+    box-shadow: 0 0 8px var(--primary-shadow);
 }
 
 ul#pokedex {
@@ -69,8 +124,8 @@ ul#pokedex {
 .loader {
     width: 50px;
     height: 50px;
-    border: 5px solid #424242;
-    border-top-color: #e53935; /* Rojo Team Rocket */
+    border: 5px solid var(--loader-bg);
+    border-top-color: var(--primary-color);
     border-radius: 50%;
     animation: spin 1s linear infinite;
 }
@@ -82,8 +137,8 @@ ul#pokedex {
 }
 
 .card-error {
-    background-color: #424242;
-    border: 1px solid #e53935;
+    background-color: var(--card-bg);
+    border: 1px solid var(--primary-color);
     border-radius: 5px;
     padding: 20px;
     text-align: center;
@@ -91,28 +146,28 @@ ul#pokedex {
 }
 
 .card {
-    background-color: #424242;
-    border: 1px solid #e53935; /* Rojo Team Rocket */
+    background-color: var(--card-bg);
+    border: 1px solid var(--primary-color);
     border-radius: 5px;
     padding: 15px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
     cursor: pointer;
     transition: transform 0.3s, box-shadow 0.3s;
     display: flex;
     flex-direction: column;
     align-items: center;
-    color: #fff; /* Texto blanco para las tarjetas */
+    color: var(--text-color);
 }
 
 .card:hover {
     transform: scale(1.05);
-    box-shadow: 0 0 10px rgba(229, 57, 53, 0.8); /* Sombra roja al pasar el ratón */
+    box-shadow: 0 0 10px var(--primary-shadow);
 }
 
 .card img {
     width: 120px;
     height: 120px;
-    background-color: #2c2c2c;
+    background-color: var(--card-image-bg);
     border-radius: 50%;
     margin-bottom: 15px;
 }
@@ -147,7 +202,7 @@ ul#pokedex {
 }
 
 .card-subtitle strong {
-    color: #e53935;
+    color: var(--primary-color);
     margin-right: 5px;
 }
 
@@ -167,15 +222,15 @@ ul#pokedex {
 }
 
 .modal-content {
-    background-color: #2c2c2c;
+    background-color: var(--container-bg);
     margin: auto;
     padding: 20px;
-    border: 2px solid #e53935;
+    border: 2px solid var(--primary-color);
     border-radius: 10px;
     width: 90%;
     max-width: 500px;
     position: relative;
-    box-shadow: 0 0 20px rgba(229, 57, 53, 0.7);
+    box-shadow: 0 0 20px var(--primary-shadow);
     animation: fadeIn 0.3s;
 }
 
@@ -196,20 +251,20 @@ ul#pokedex {
 
 .modal-close:hover,
 .modal-close:focus {
-    color: #e53935;
+    color: var(--primary-color);
     text-decoration: none;
 }
 
 .modal-header {
     text-align: center;
-    border-bottom: 1px solid #444;
+    border-bottom: 1px solid var(--border-color);
     padding-bottom: 15px;
     margin-bottom: 15px;
 }
 
 .modal-header h2 {
-    font-family: 'Press Start 2P', cursive;
-    color: #e53935;
+    font-family: var(--font-pixel);
+    color: var(--primary-color);
     margin: 0;
     font-size: 1.2em;
 }
@@ -222,19 +277,20 @@ ul#pokedex {
 .modal-image {
     width: 150px;
     height: 150px;
-    background-color: #424242;
+    background-color: var(--card-bg);
     border-radius: 50%;
-    border: 2px solid #e53935;
+    border: 2px solid var(--primary-color);
 }
 
 .modal-details {
     flex-grow: 1;
-    font-family: Arial, sans-serif; /* Font más legible para detalles */
+    font-family: var(--font-sans); /* Font más legible para detalles */
 }
 
 .modal-description {
     font-style: italic;
-    color: #ddd;
+    color: var(--text-color);
+    opacity: 0.9;
     margin-bottom: 15px;
     font-size: 0.9em;
     line-height: 1.5;
@@ -242,9 +298,9 @@ ul#pokedex {
 
 .stats-container { width: 100%; }
 .stat-row { display: flex; align-items: center; margin-bottom: 8px; font-size: 0.8em; }
-.stat-name { width: 100px; text-transform: capitalize; color: #f1f1f1; }
-.stat-bar { width: 100%; background-color: #1a1a1a; border-radius: 5px; height: 15px; overflow: hidden; border: 1px solid #555; }
-.stat-bar-fill { height: 100%; background-color: #e53935; width: 0%; transition: width 0.5s ease-in-out; text-align: right; padding-right: 5px; box-sizing: border-box; color: #fff; font-size: 0.7em; line-height: 15px; }
+.stat-name { width: 100px; text-transform: capitalize; color: var(--text-color); }
+.stat-bar { width: 100%; background-color: var(--bg-color); border-radius: 5px; height: 15px; overflow: hidden; border: 1px solid var(--border-color); }
+.stat-bar-fill { height: 100%; background-color: var(--primary-color); width: 0%; transition: width 0.5s ease-in-out; text-align: right; padding-right: 5px; box-sizing: border-box; color: #fff; font-size: 0.7em; line-height: 15px; }
 
 /* Responsive modal */
 @media (max-width: 600px) {

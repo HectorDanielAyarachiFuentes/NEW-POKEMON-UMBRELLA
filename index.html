@@ -12,9 +12,13 @@
 </head>
 <body>
     <div class="container">
-        <h1>Team Rocket Pokédex</h1>
+        <div class="header">
+            <h1>Team Rocket Pokédex</h1>
+            <button id="theme-toggle-btn" class="theme-toggle-btn">Cambiar Tema</button>
+        </div>
         <div class="box">
-            <input id="searchbar" class="poke-search" type="text" name="search" placeholder="Busca tu Pokémon...">
+            <input id="searchbar" class="poke-search" type="text" name="search" placeholder="Busca tu Pokémon..." list="pokemon-suggestions">
+            <datalist id="pokemon-suggestions"></datalist>
         </div>
         <ul id="pokedex"></ul>
     </div>

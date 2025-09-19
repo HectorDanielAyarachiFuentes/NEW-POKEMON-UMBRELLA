@@ -25,6 +25,7 @@ const fetchPokemon = () => {
             speciesUrl: result.species.url,
         }));
         displayPokemon(pokemonList);
+        populateSuggestions(pokemonList);
     })
     .catch((error) => {
         console.error('Error al obtener los Pokémon:', error);
@@ -62,6 +63,11 @@ const capitalize = (string) => {
     return string.charAt(0).toUpperCase() + string.slice(1);
 };
 
+const populateSuggestions = (pokemon) => {
+    const suggestionsDatalist = document.getElementById('pokemon-suggestions');
+    suggestionsDatalist.innerHTML = pokemon.map(p => `<option value="${capitalize(p.name)}"></option>`).join('');
+};
+
 fetchPokemon();
 
 const search_pokemon = () => {
@@ -74,7 +80,13 @@ const search_pokemon = () => {
 
 // Añadir el event listener al input de búsqueda para separar JS del HTML
 const searchBar = document.getElementById('searchbar');
-searchBar.addEventListener('keyup', search_pokemon);
+let debounceTimeout;
+searchBar.addEventListener('input', () => { // 'input' es mejor que 'keyup' para búsquedas
+    clearTimeout(debounceTimeout);
+    debounceTimeout = setTimeout(() => {
+        search_pokemon();
+    }, 300); // Espera 300ms después de que el usuario deja de escribir
+});
 
 // --- Modal Logic ---
 
@@ -151,3 +163,24 @@ modalContainer.addEventListener('click', (e) => {
         closeModal();
     }
 });
+
+// --- Theme Switcher Logic ---
+const themeToggleBtn = document.getElementById('theme-toggle-btn');
+const body = document.body;
+
+const applyTheme = (theme) => {
+    body.classList.remove('light-theme', 'dark-theme');
+    body.classList.add(theme);
+    localStorage.setItem('pokemon-theme', theme);
+};
+
+const toggleTheme = () => {
+    const currentTheme = body.classList.contains('dark-theme') ? 'light-theme' : 'dark-theme';
+    applyTheme(currentTheme);
+};
+
+themeToggleBtn.addEventListener('click', toggleTheme);
+
+// On initial load, apply saved theme or default to dark
+const savedTheme = localStorage.getItem('pokemon-theme') || 'dark-theme';
+applyTheme(savedTheme);
