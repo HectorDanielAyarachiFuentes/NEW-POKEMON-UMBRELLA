@@ -57,6 +57,26 @@ const displayPokemon = (pokemon) => {
         )
         .join('');
     pokedex.innerHTML = pokemonHTMLString;
+
+    // --- Intersection Observer para animar las tarjetas al aparecer ---
+    const cards = document.querySelectorAll('.card');
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            // Si la tarjeta está en la pantalla, la hacemos visible
+            if (entry.isIntersecting) {
+                entry.target.classList.add('is-visible');
+                observer.unobserve(entry.target); // Dejamos de observar la tarjeta una vez que es visible
+            }
+        });
+    }, {
+        threshold: 0.1 // La animación se dispara cuando el 10% de la tarjeta es visible
+    });
+
+    cards.forEach((card, index) => {
+        // Añadimos un retraso escalonado para un efecto de cascada
+        card.style.transitionDelay = `${index * 50}ms`;
+        observer.observe(card);
+    });
 };
 
 const capitalize = (string) => {
